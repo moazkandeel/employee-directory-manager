@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Header Component (Onyx & Gold Theme)
-   ========================================================================== */
+/* Header Component (Onyx & Gold Theme)*/
 .app-header {
   display: flex;
   align-items: center;
@@ -17,9 +15,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* ==========================================================================
-   Brand / Logo Section
-   ========================================================================== */
+/* Brand / Logo Section */
 .brand {
   display: flex;
   align-items: center;
@@ -66,9 +62,7 @@
   display: block;
 }
 
-/* ==========================================================================
-   Main Navigation
-   ========================================================================== */
+/* Main Navigation */
 .main-nav {
   display: flex;
   align-items: center;
@@ -119,9 +113,7 @@
   box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
 }
 
-/* ==========================================================================
-   Header Right (Status & Profile)
-   ========================================================================== */
+/* Header Right (Status & Profile) */
 .header-right {
   display: flex;
   align-items: center;

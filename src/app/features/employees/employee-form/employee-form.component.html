@@ -1,9 +1,7 @@
 <section class="form-page">
-  <!-- خلفيات الإضاءة -->
   <div class="bg-glow bg-glow-one"></div>
   <div class="bg-glow bg-glow-two"></div>
 
-  <!-- زر العودة -->
   <a class="back-link" routerLink="/employees">
   <div class="back-icon-box">
     <span>←</span>
@@ -12,7 +10,6 @@
 </a>
 
   <div class="form-card">
-    <!-- هيدر الفورم -->
     <div class="form-header">
       <div class="header-icon">
         {{ isEditMode ? '✏️' : '👤' }}
@@ -25,7 +22,6 @@
 
     <form [formGroup]="form" (ngSubmit)="saveEmployee()" class="employee-form">
       
-      <!-- القسم الأول: المعلومات الشخصية -->
       <div class="form-section">
         <span class="section-title">Personal Information</span>
         
@@ -72,7 +68,6 @@
         </div>
       </div>
 
-      <!-- القسم الثاني: تفاصيل الوظيفة -->
       <div class="form-section">
         <span class="section-title">Employment Details</span>
 
@@ -144,7 +139,6 @@
         </div>
       </div>
 
-      <!-- الأزرار -->
       <div class="form-actions">
         <button type="button" class="btn cancel-btn" (click)="cancel()">
           Cancel

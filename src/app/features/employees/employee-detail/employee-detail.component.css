@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Employee Detail Page Styling (Onyx & Gold Theme)
-   ========================================================================== */
+/*  Employee Detail Page Styling (Onyx & Gold Theme) */
 .detail-page,
 .not-found-employee {
   position: relative;
@@ -352,9 +350,7 @@
   }
 }
 
-/* ==========================================================================
-   Back Button Styling (Modern Pill Button)
-   ========================================================================== */
+/* Back Button Styling (Modern Pill Button) */
 .back-link {
   display: inline-flex;
   align-items: center;

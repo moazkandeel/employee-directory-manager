@@ -291,9 +291,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 
-/* ==========================================================================
-   Back Button Styling (Modern Pill Button)
-   ========================================================================== */
+/*  Back Button Styling (Modern Pill Button) */
 .back-link {
   display: inline-flex;
   align-items: center;

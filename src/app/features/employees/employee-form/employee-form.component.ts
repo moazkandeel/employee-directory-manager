@@ -59,40 +59,17 @@ export class EmployeeFormComponent implements OnInit {
 
     this.form = this.formBuilder.group({
 
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3)
-        ]
-      ],
+      name: ['',[  Validators.required, Validators.minLength(3)]],
 
-      department: [
-        '',
-        Validators.required
-      ],
+      department: [ '', Validators.required],
 
-      title: [
-        '',
-        Validators.required
-      ],
+      title: ['',Validators.required],
 
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ],
+      email: ['', [Validators.required,Validators.email]],
 
-      hireDate: [
-        '',
-        futureDateValidator
-      ],
+      hireDate: ['',futureDateValidator],
 
-      isActive: [
-        true
-      ]
+      isActive: [true]
 
     });
 

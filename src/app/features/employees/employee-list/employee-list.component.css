@@ -213,9 +213,7 @@
 
 
 
-/* ==========================================================================
-   List Controls Section (Search & Add Button)
-   ========================================================================== */
+/* List Controls Section (Search & Add Button) */
 .list-controls {
   display: flex;
   align-items: center;
@@ -338,16 +336,13 @@
 }
 
 
-/* ==========================================================================
-   Clear Button (X) Styling
-   ========================================================================== */
+/* Clear Button (X) Styling */
 .search-input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-/* تعديل الـ padding الأيمن للـ input ليعطي مساحة لظهور الـ X */
 .search-input-wrapper input {
   padding-right: 3rem !important;
 }

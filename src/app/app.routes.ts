@@ -7,34 +7,16 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
 
-  {
-    path: 'employees',
-    component: EmployeeListComponent
-  },
+  {path: 'employees',component: EmployeeListComponent},
 
-  {
-    path: 'employees/new',
-    component: EmployeeFormComponent
-  },
+  {path: 'employees/new',component: EmployeeFormComponent},
 
-  {
-    path: 'employees/:id/edit',
-    component: EmployeeFormComponent
-  },
+  { path: 'employees/:id/edit', component: EmployeeFormComponent},
 
-  {
-    path: 'employees/:id',
-    component: EmployeeDetailComponent
-  },
+  {path: 'employees/:id', component: EmployeeDetailComponent},
 
-  {
-    path: 'not-found',
-    component: NotFoundComponent
-  },
+  {path: 'not-found', component: NotFoundComponent},
 
-  {
-    path: '**',
-    component: NotFoundComponent
-  }
+  { path: '**', component: NotFoundComponent}
 
 ];
