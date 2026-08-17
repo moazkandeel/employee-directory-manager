@@ -1,0 +1,50 @@
+<header class="app-header">
+
+  <!-- Brand / Logo Section -->
+  <div class="brand">
+    <div class="brand-icon">
+      <span>✦</span>
+    </div>
+
+    <div class="brand-text">
+      <h1>Employee <span>Hub</span></h1>
+      <span class="subtitle">Employee Directory Manager</span>
+    </div>
+  </div>
+
+  <!-- Navigation Links -->
+  <nav class="main-nav">
+    <a
+      routerLink="/employees"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-link"
+    >
+      <span class="nav-icon">👥</span>
+      <span class="nav-text">Employees</span>
+    </a>
+
+    <a
+      routerLink="/employees/new"
+      routerLinkActive="active"
+      class="nav-link nav-btn-primary"
+    >
+      <span class="nav-icon">➕</span>
+      <span class="nav-text">Add Employee</span>
+    </a>
+  </nav>
+
+  <!-- Right Actions (Status & Profile) -->
+  <div class="header-right">
+    <div class="header-status">
+      <span class="status-dot"></span>
+      <span>Internal System</span>
+    </div>
+
+    <button class="profile-button" type="button">
+      <span class="profile-avatar">M</span>
+      <span class="profile-name">Admin</span>
+    </button>
+  </div>
+
+</header>

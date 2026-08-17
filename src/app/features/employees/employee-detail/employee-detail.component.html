@@ -1,0 +1,113 @@
+@if (employee) {
+  <a class="back-link" routerLink="/employees">
+  <div class="back-icon-box">
+    <span>←</span>
+  </div>
+  <span class="back-text">Back to Employees</span>
+</a>
+
+  <section class="detail-page">
+
+    <div class="detail-card">
+
+      <div class="detail-header">
+
+        <div class="avatar">
+          {{ employee.name.charAt(0) }}
+        </div>
+
+        <div class="header-info">
+
+          <div class="name-row">
+
+            <h1>
+              {{ employee.name }}
+            </h1>
+
+            <span
+              class="status"
+              [class.active]="employee.isActive"
+              [class.inactive]="!employee.isActive"
+            >
+              {{ employee.isActive ? 'Active' : 'Inactive' }}
+            </span>
+
+          </div>
+
+          <p>
+            {{ employee.title }}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="details-grid">
+
+        <div class="detail-item">
+          <span class="label">Department</span>
+          <strong>{{ employee.department }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span class="label">Email</span>
+          <strong>{{ employee.email }}</strong>
+        </div>
+
+        <div class="detail-item">
+          <span class="label">Hire Date</span>
+    {{ employee?.hireDate | date:'dd MMM yyyy' }}
+        </div>
+
+        <div class="detail-item">
+          <span class="label">Employee ID</span>
+          <strong>#{{ employee.id }}</strong>
+        </div>
+
+      </div>
+
+      <div class="actions">
+
+        <a
+          class="btn secondary"
+          [routerLink]="['/employees', employee.id, 'edit']"
+        >
+          Edit Employee
+        </a>
+
+        <button
+          class="btn danger"
+          type="button"
+          (click)="deleteEmployee()"
+        >
+          Delete Employee
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+} @else {
+
+  <section class="not-found-employee">
+
+    <h2>Employee Not Found</h2>
+
+    <p>
+      The employee you're looking for does not exist.
+    </p>
+
+    <a
+      class="btn secondary"
+      routerLink="/employees"
+    >
+      Back to Employees
+    </a>
+
+  </section>
+
+}

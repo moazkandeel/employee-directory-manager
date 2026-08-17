@@ -1,0 +1,339 @@
+/* ==========================================================================
+   Modern Onyx & Gold Form Layout
+   ========================================================================== */
+.form-page {
+  position: relative;
+  max-width: 840px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Background Lighting */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-glow-one {
+  width: 400px;
+  height: 400px;
+  background: rgba(212, 175, 55, 0.08);
+  top: -5%;
+  left: -5%;
+}
+
+.bg-glow-two {
+  width: 320px;
+  height: 320px;
+  background: rgba(147, 51, 234, 0.05);
+  bottom: -5%;
+  right: -5%;
+}
+
+/* Back Link Button */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem 0.45rem 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 99px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.back-icon-box {
+  width: 26px;
+  height: 26px;
+  background: rgba(212, 175, 55, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f3e5ab;
+  font-size: 0.85rem;
+}
+
+.back-link:hover {
+  background: rgba(212, 175, 55, 0.1);
+  color: #ffffff;
+  transform: translateX(-4px);
+}
+
+/* Form Container Card */
+.form-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(18, 18, 22, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 24px;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7),
+              0 0 30px rgba(212, 175, 55, 0.04);
+}
+
+/* Header */
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.header-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.form-header h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem 0;
+}
+
+.form-header p {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Sections */
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #f3e5ab;
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
+}
+
+/* Grid Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* Inputs & Labels */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  color: #cbd5e1;
+  font-size: 0.825rem;
+  font-weight: 600;
+}
+
+.input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 1rem;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.input-box input,
+.input-box select {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.6rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.25 ease;
+  box-sizing: border-box;
+}
+
+.input-box input::placeholder {
+  color: #475569;
+}
+
+.input-box select option {
+  background-color: #121216;
+  color: #ffffff;
+}
+
+/* Custom Arrow for Select */
+.select-box::after {
+  content: "▾";
+  position: absolute;
+  right: 1.1rem;
+  color: #f3e5ab;
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+.select-box select {
+  appearance: none;
+}
+
+/* Focus States */
+.input-box input:focus,
+.input-box select:focus {
+  border-color: rgba(212, 175, 55, 0.6);
+  background: rgba(212, 175, 55, 0.03);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+}
+
+/* Calendar icon styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(1) hue-rotate(5deg);
+  cursor: pointer;
+}
+
+/* Errors */
+.error {
+  color: #f87171;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.1rem;
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.btn {
+  padding: 0.75rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.cancel-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+  color: #0a0a0c;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.save-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(0.8);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .form-card {
+    padding: 1.5rem;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+  .btn {
+    width: 100%;
+  }
+}
+
+
+
+/* ==========================================================================
+   Back Button Styling (Modern Pill Button)
+   ========================================================================== */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 99px;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 1.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: fit-content;
+}
+
+.back-icon-box {
+  width: 30px;
+  height: 30px;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-text, #f3e5ab);
+  font-size: 0.9rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.back-link:hover {
+  color: #ffffff;
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateX(-4px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-link:hover .back-icon-box {
+  background: var(--gold-grad, linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%));
+  color: #0a0a0c;
+}
+

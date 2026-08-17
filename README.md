@@ -1,59 +1,160 @@
-# EmployeeDirectoryManager
+# Employee Directory Manager
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+Employee Directory Manager is a Single Page Application built with Angular
+for managing employee records.
 
-## Development server
+The application allows users to view, search, add, edit, and delete employees
+through a clean and responsive interface.
 
-To start a local development server, run:
+## Features
+
+- Employee listing
+- Live employee search
+- Employee details
+- Add employee
+- Edit employee
+- Delete employee
+- Active / Inactive employee status
+- Reactive Forms for Add/Edit
+- Template-driven Forms for live search
+- Built-in form validation
+- Custom future-date validator
+- LocalStorage persistence
+- Angular Router navigation
+- 404 Not Found page
+- Custom attribute directive
+- Custom pipe
+- Built-in Angular pipes
+- Notification service
+- Parent-child communication using `@Input()` and `@Output()`
+- Standalone Angular components
+
+## Architecture
+
+This project uses Angular Standalone Components instead of NgModules.
+
+Standalone components were chosen because they provide a modern and simpler
+Angular architecture while keeping dependencies explicit inside each component.
+
+The project is organized by feature, with separate folders for:
+
+- Employee features
+- Core services
+- Shared directives and pipes
+- Application pages
+
+## Technologies
+
+- Angular 19
+- TypeScript
+- HTML5
+- CSS3
+- RxJS
+- Angular Router
+- Reactive Forms
+- Template-driven Forms
+- LocalStorage
+
+## Forms
+
+The project deliberately uses both Angular form approaches:
+
+### Reactive Forms
+
+Reactive Forms are used for:
+
+- Add Employee
+- Edit Employee
+- Form validation
+- Custom future-date validation
+
+### Template-driven Forms
+
+Template-driven Forms are used for:
+
+- Live employee search
+
+This demonstrates the difference between the two Angular forms approaches.
+
+## Routing
+
+The application uses Angular Router with the following routes:
+
+| Route | Purpose |
+|---|---|
+| `/employees` | Employee list |
+| `/employees/new` | Add employee |
+| `/employees/:id` | Employee details |
+| `/employees/:id/edit` | Edit employee |
+| `/not-found` | Not Found page |
+| `**` | Wildcard 404 route |
+
+Navigation is handled using `routerLink`, `routerLinkActive`, and
+`Router.navigate()` without full page reloads.
+
+## Data Storage
+
+The application currently uses static mock employee data stored inside
+`EmployeeService`.
+
+Employee changes are persisted using browser `LocalStorage`.
+
+No backend API or HTTP requests are used in this task.
+## How to Run
+
+Install the project dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open your browser and navigate to:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Build
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+To create a production build:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The generated build files will be stored in the `dist/` directory.
 
-## Running unit tests
+## Known Limitations
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- There is no backend API yet.
+- Employee data is stored using browser LocalStorage.
+- LocalStorage data is specific to the browser/profile.
+- Authentication and authorization are not implemented.
+- Data is currently based on local mock data.
 
-```bash
-ng test
-```
+## Reflection
 
-## Running end-to-end tests
+The Angular component structure and routing were relatively straightforward.
 
-For end-to-end (e2e) testing, run:
+Using `@Input()` and `@Output()` helped keep the employee card independent from
+the employee management logic.
 
-```bash
-ng e2e
-```
+Reactive Forms and custom validation were more challenging because they require
+understanding FormGroup, validators, and form states.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Working with LocalStorage also required careful handling to keep employee
+changes after refreshing the page.
 
-## Additional Resources
+With more time, I would improve the application by adding a backend API,
+authentication, automated tests, pagination, sorting, and more advanced
+employee filtering.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Project Status
+
+Completed as part of the Angular training task.

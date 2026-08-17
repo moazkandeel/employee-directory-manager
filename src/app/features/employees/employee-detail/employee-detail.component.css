@@ -1,0 +1,402 @@
+/* ==========================================================================
+   Employee Detail Page Styling (Onyx & Gold Theme)
+   ========================================================================== */
+.detail-page,
+.not-found-employee {
+  position: relative;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Background Glow Effects */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-glow-one {
+  width: 350px;
+  height: 350px;
+  background: rgba(212, 175, 55, 0.12);
+  top: -10%;
+  left: -10%;
+}
+
+.bg-glow-two {
+  width: 300px;
+  height: 300px;
+  background: rgba(187, 134, 252, 0.05);
+  bottom: 0;
+  right: -5%;
+}
+
+/* Back Link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link .arrow {
+  transition: transform 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--gold-text, #f3e5ab);
+}
+
+.back-link:hover .arrow {
+  transform: translateX(-4px);
+}
+
+/* Detail Card */
+.detail-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(18, 18, 22, 0.82);
+  border: 1px solid var(--border-gold-subtle, rgba(212, 175, 55, 0.25));
+  border-radius: 28px;
+  padding: 2.5rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6),
+              0 0 40px rgba(212, 175, 55, 0.06);
+}
+
+/* Header Section */
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.avatar {
+  width: 84px;
+  height: 84px;
+  background: var(--gold-grad, linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%));
+  color: #0a0a0c;
+  font-size: 2.5rem;
+  font-weight: 900;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+  flex-shrink: 0;
+}
+
+.header-info {
+  flex: 1;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.name-row h1 {
+  color: #ffffff;
+  font-size: 1.85rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.employee-title {
+  color: var(--text-muted, #94a3b8);
+  font-size: 1rem;
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+}
+
+/* Status Badges */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 0.9rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status.active {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status.active .status-dot {
+  background-color: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+
+.status.inactive {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status.inactive .status-dot {
+  background-color: #f87171;
+  box-shadow: 0 0 8px #f87171;
+}
+
+/* Divider Line */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.25) 0%, rgba(255, 255, 255, 0.05) 100%);
+  margin: 2rem 0;
+}
+
+/* Details Grid */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+  background: rgba(212, 175, 55, 0.05);
+  border-color: rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.icon-box {
+  width: 42px;
+  height: 42px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.detail-item .label {
+  font-size: 0.75rem;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-item strong {
+  color: #f8fafc;
+  font-size: 0.95rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.id-tag {
+  color: var(--gold-text, #f3e5ab) !important;
+  font-family: monospace;
+  font-size: 1.05rem !important;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+}
+
+/* Secondary (Edit) Button */
+.btn.secondary {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--gold-text, #f3e5ab);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.btn.secondary:hover {
+  background: var(--gold-grad, linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%));
+  color: #0a0a0c;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Danger (Delete) Button */
+.btn.danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn.danger:hover {
+  background: #dc2626;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Empty / Not Found State */
+.not-found-card {
+  text-align: center;
+  background: rgba(18, 18, 22, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 28px;
+  padding: 3.5rem 2rem;
+  backdrop-filter: blur(16px);
+}
+
+.empty-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.25rem;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.not-found-card h2 {
+  color: #ffffff;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.not-found-card p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Responsive Setup */
+@media (max-width: 680px) {
+  .detail-card {
+    padding: 1.5rem;
+  }
+
+  .detail-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .name-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Back Button Styling (Modern Pill Button)
+   ========================================================================== */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 99px;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 1.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: fit-content;
+  
+}
+
+.back-icon-box {
+  width: 30px;
+  height: 30px;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-text, #f3e5ab);
+  font-size: 0.9rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  color: #ffffff;
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateX(-4px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-link:hover .back-icon-box {
+  background: var(--gold-grad, linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%));
+  color: #0a0a0c;
+}
+

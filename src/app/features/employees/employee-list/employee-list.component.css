@@ -1,0 +1,385 @@
+/* ==========================================================================
+   Wrapper & Decorative Background
+   ========================================================================== */
+.employee-list-wrapper {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  overflow: hidden;
+}
+
+.bg-glow {
+  position: absolute;
+  top: -120px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(10, 10, 12, 0) 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   Page Heading Section
+   ========================================================================== */
+.page-heading {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.5rem;
+  gap: 2rem;
+}
+
+.eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 99px;
+  color: var(--gold-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+  animation: pulse-ring 1.8s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(255, 215, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+.page-heading h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--text-light);
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.page-heading h1 span {
+  background: var(--gold-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+}
+
+/* Employees Count Badge */
+.employee-count-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface-dark);
+  padding: 0.85rem 1.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-gold-subtle);
+  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+.count-ring {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--gold-grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a0a0c;
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.35);
+}
+
+.count-number {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.count-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.count-meta .label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.count-meta small {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   Grid Layout (4 Cards Per Row Setup)
+   ========================================================================== */
+.employee-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Scaling for Grid */
+@media (max-width: 1200px) {
+  .employee-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .employee-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .employee-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .employee-count-card {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ==========================================================================
+   Empty State
+   ========================================================================== */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--surface-dark);
+  border-radius: var(--radius-card);
+  border: 2px dashed rgba(212, 175, 55, 0.25);
+  max-width: 480px;
+  margin: 3rem auto;
+}
+
+.empty-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  background: rgba(212, 175, 55, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  font-size: 2rem;
+}
+
+.empty-state h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+
+
+/* ==========================================================================
+   List Controls Section (Search & Add Button)
+   ========================================================================== */
+.list-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Search Form Wrapper */
+.search-form {
+  flex: 1;
+  max-width: 600px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.25rem;
+  font-size: 1rem;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 0.9rem 1.25rem 0.9rem 3.25rem;
+  background: rgba(18, 18, 21, 0.8);
+  border: 1px solid var(--border-gold-subtle, rgba(212, 175, 55, 0.25));
+  border-radius: 16px;
+  color: var(--text-light, #f8fafc);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.search-input-wrapper input::placeholder {
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.9rem;
+}
+
+/* Hover & Focus Effects on Input */
+.search-input-wrapper input:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.search-input-wrapper input:focus {
+  border-color: var(--border-gold-bright, rgba(255, 215, 0, 0.6));
+  background: rgba(26, 26, 30, 0.95);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.15), 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.search-input-wrapper input:focus + .search-icon,
+.search-input-wrapper:focus-within .search-icon {
+  opacity: 1;
+}
+
+/* Add Employee Button */
+.add-employee-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  background: var(--gold-grad, linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%));
+  color: #0a0a0c;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.add-employee-btn .btn-icon {
+  font-size: 0.85rem;
+  transition: transform 0.3s ease;
+}
+
+.add-employee-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(212, 175, 55, 0.4);
+}
+
+.add-employee-btn:hover .btn-icon {
+  transform: rotate(90deg);
+}
+
+.add-employee-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive Setup */
+@media (max-width: 768px) {
+  .list-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .search-form {
+    max-width: 100%;
+  }
+
+  .add-employee-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+
+/* ==========================================================================
+   Clear Button (X) Styling
+   ========================================================================== */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* تعديل الـ padding الأيمن للـ input ليعطي مساحة لظهور الـ X */
+.search-input-wrapper input {
+  padding-right: 3rem !important;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 1rem;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-gold-subtle, rgba(212, 175, 55, 0.3));
+  border-radius: 50%;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  outline: none;
+  padding: 0;
+}
+
+.clear-btn:hover {
+  background: var(--gold-grad, linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%));
+  color: #0a0a0c;
+  border-color: transparent;
+  transform: scale(1.1);
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+.clear-btn:active {
+  transform: scale(0.95);
+}

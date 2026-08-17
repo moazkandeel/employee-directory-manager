@@ -1,0 +1,159 @@
+<section class="form-page">
+  <!-- خلفيات الإضاءة -->
+  <div class="bg-glow bg-glow-one"></div>
+  <div class="bg-glow bg-glow-two"></div>
+
+  <!-- زر العودة -->
+  <a class="back-link" routerLink="/employees">
+  <div class="back-icon-box">
+    <span>←</span>
+  </div>
+  <span class="back-text">Back to Employees</span>
+</a>
+
+  <div class="form-card">
+    <!-- هيدر الفورم -->
+    <div class="form-header">
+      <div class="header-icon">
+        {{ isEditMode ? '✏️' : '👤' }}
+      </div>
+      <div>
+        <h2>{{ isEditMode ? 'Edit Employee Profile' : 'Create New Employee' }}</h2>
+        <p>{{ isEditMode ? 'Update existing details in the system.' : 'Fill in the details to add a team member.' }}</p>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="saveEmployee()" class="employee-form">
+      
+      <!-- القسم الأول: المعلومات الشخصية -->
+      <div class="form-section">
+        <span class="section-title">Personal Information</span>
+        
+        <div class="form-grid">
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <div class="input-box">
+              <span class="field-icon">👤</span>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                placeholder="e.g. Alex Morgan"
+              />
+            </div>
+            @if (form.get('name')?.touched && form.get('name')?.hasError('required')) {
+              <small class="error">Name is required.</small>
+            }
+            @if (form.get('name')?.touched && form.get('name')?.hasError('minlength')) {
+              <small class="error">Name must be at least 3 characters.</small>
+            }
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <div class="input-box">
+              <span class="field-icon">✉️</span>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="alex.m@company.com"
+              />
+            </div>
+            @if (form.get('email')?.touched && form.get('email')?.hasError('required')) {
+              <small class="error">Email is required.</small>
+            }
+            @if (form.get('email')?.touched && form.get('email')?.hasError('email')) {
+              <small class="error">Please enter a valid email.</small>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- القسم الثاني: تفاصيل الوظيفة -->
+      <div class="form-section">
+        <span class="section-title">Employment Details</span>
+
+        <div class="form-grid">
+          <!-- Department -->
+          <div class="form-group">
+            <label for="department">Department</label>
+            <div class="input-box select-box">
+              <span class="field-icon">🏢</span>
+              <select id="department" formControlName="department">
+                <option value="" disabled>Select Department</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Human Resources">Human Resources</option>
+                <option value="Finance">Finance</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sales">Sales</option>
+              </select>
+            </div>
+            @if (form.get('department')?.touched && form.get('department')?.hasError('required')) {
+              <small class="error">Department is required.</small>
+            }
+          </div>
+
+          <!-- Job Title -->
+          <div class="form-group">
+            <label for="title">Job Title</label>
+            <div class="input-box">
+              <span class="field-icon">💼</span>
+              <input
+                id="title"
+                type="text"
+                formControlName="title"
+                placeholder="e.g. Senior Developer"
+              />
+            </div>
+            @if (form.get('title')?.touched && form.get('title')?.hasError('required')) {
+              <small class="error">Job title is required.</small>
+            }
+          </div>
+
+          <!-- Hire Date -->
+          <div class="form-group">
+            <label for="hireDate">Hire Date</label>
+            <div class="input-box">
+              <span class="field-icon">📅</span>
+              <input
+                id="hireDate"
+                type="date"
+                formControlName="hireDate"
+                (keydown)="$event.preventDefault()"
+              />
+            </div>
+            @if (form.get('hireDate')?.touched && form.get('hireDate')?.hasError('futureDate')) {
+              <small class="error">Date cannot be in the future.</small>
+            }
+          </div>
+
+          <!-- Employment Status -->
+          <div class="form-group">
+            <label for="status">Status</label>
+            <div class="input-box select-box">
+              <span class="field-icon">⚡</span>
+              <select id="status" formControlName="isActive">
+                <option [ngValue]="true">Active</option>
+                <option [ngValue]="false">Inactive</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- الأزرار -->
+      <div class="form-actions">
+        <button type="button" class="btn cancel-btn" (click)="cancel()">
+          Cancel
+        </button>
+
+        <button type="submit" class="btn save-btn" [disabled]="form.invalid">
+          <span>{{ isEditMode ? 'Save Changes' : 'Create Profile' }}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

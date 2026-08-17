@@ -1,0 +1,57 @@
+<article
+class="employee-card"
+appHighlightOnHover
+[class.inactive]="!employee.isActive"
+(click)="onCardClick()"
+>
+
+  <!-- طبقة الإضاءة خلف الكارت -->
+  <div class="card-glow"></div>
+
+  <div class="card-header">
+    <div class="avatar-container">
+      <div class="avatar">
+        {{ employee.name.charAt(0) }}
+      </div>
+    </div>
+
+    <span
+      class="status-pill"
+      [class.active]="employee.isActive"
+      [class.inactive-status]="!employee.isActive"
+    >
+      <span class="status-dot"></span>
+      {{ employee.isActive ? 'Active' : 'Inactive' }}
+    </span>
+  </div>
+
+  <div class="employee-info">
+    <h3 class="name">{{ employee.name }}</h3>
+    <p class="title">{{ employee.title | uppercase }}</p>
+    
+    <div class="tag-container">
+      <span class="department-tag">
+       {{ employee.department | departmentLabel }}
+      </span>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="email-box">
+      <span class="email-icon">✉</span>
+      <span class="email">{{ employee.email }}</span>
+    </div>
+
+    <div class="arrow-btn">
+      <span>→</span>
+    </div>
+  </div>
+
+  <div class="hire-date">
+  <span>📅</span>
+  <span>{{ employee.hireDate | date:'MMM d, y' }}</span>
+</div>
+
+
+
+</article>

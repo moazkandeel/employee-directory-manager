@@ -1,0 +1,104 @@
+<section class="employee-list-wrapper">
+
+  <!-- Decorative background -->
+  <div class="bg-glow"></div>
+
+  <!-- Page Heading -->
+  <header class="page-heading">
+    <div class="heading-content">
+      <span class="eyebrow-badge">
+        <span class="pulse-dot"></span>
+        EMPLOYEE DIRECTORY
+      </span>
+
+      <h1>
+        Our Team <span>Members</span>
+      </h1>
+
+      <p class="subtitle">
+        Explore, manage, and connect with your powerhouse team.
+      </p>
+    </div>
+
+    <div class="employee-count-card">
+      <div class="count-ring">
+        <span class="count-number">
+          {{ filteredEmployees.length }}
+        </span>
+      </div>
+
+      <div class="count-meta">
+        <span class="label">Total</span>
+        <small>Employees</small>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search + Add Employee Controls -->
+  <div class="list-controls">
+    <form #searchForm="ngForm" class="search-form">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        
+        <input
+          type="text"
+          name="search"
+          [(ngModel)]="searchTerm"
+          placeholder="Search by name, department or title..."
+        >
+
+        <!-- زر المسح الفوري (X) يظهر تلقائياً عند وجود نص -->
+        @if (searchTerm) {
+          <button
+            type="button"
+            class="clear-btn"
+            (click)="searchTerm = ''"
+            title="Clear search"
+          >
+            ✕
+          </button>
+        }
+      </div>
+    </form>
+
+    <button
+      type="button"
+      class="add-employee-btn"
+      (click)="goToAddEmployee()"
+    >
+      <span class="btn-icon">➕</span>
+      <span>Add Employee</span>
+    </button>
+  </div>
+
+  <!-- Employees Grid -->
+  @if (filteredEmployees.length > 0) {
+    <div class="employee-grid">
+      @for (
+        employee of filteredEmployees;
+        track employee.id
+      ) {
+        <app-employee-card
+          [employee]="employee"
+          (employeeSelected)="onEmployeeSelected($event)"
+        />
+      }
+    </div>
+  } @else {
+    <!-- Empty State -->
+    <div class="empty-state">
+      <div class="empty-icon-wrapper">
+        <span class="empty-icon">👥</span>
+      </div>
+
+      <h2>
+        No employees found
+      </h2>
+
+      <p>
+        There are currently no team members matching your search.
+      </p>
+    </div>
+  }
+
+</section>
