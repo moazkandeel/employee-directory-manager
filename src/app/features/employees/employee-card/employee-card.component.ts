@@ -29,7 +29,7 @@ export class EmployeeCardComponent {
   employee!: Employee;
 
   @Output()
-  employeeSelected = new EventEmitter<number>();
+  employeeSelected = new EventEmitter<number | string>();
 
   onCardClick(): void {
     this.employeeSelected.emit(this.employee.id);

@@ -6,13 +6,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class NotificationService {
 
-  private messageSubject =
-    new BehaviorSubject<string>('');
+  private readonly messageSubject = new BehaviorSubject<string>('');
 
-  message$ = this.messageSubject.asObservable();
+  readonly message$ = this.messageSubject.asObservable();
 
   show(message: string): void {
-
     this.messageSubject.next(message);
 
     setTimeout(() => {

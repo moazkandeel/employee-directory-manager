@@ -7,16 +7,13 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { Employee } from '../../../models/employee';
 import { EmployeeService } from '../../../core/services/employee.service';
 import { NotificationService } from '../../../core/services/notification.service';
 
-function futureDateValidator(
-  control: AbstractControl
-): ValidationErrors | null {
-
+function futureDateValidator(control: AbstractControl): ValidationErrors | null {
   if (!control.value) {
     return null;
   }
@@ -27,87 +24,71 @@ function futureDateValidator(
   selectedDate.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
-  return selectedDate > today
-    ? { futureDate: true }
-    : null;
+  return selectedDate > today ? { futureDate: true } : null;
 }
 
 @Component({
   selector: 'app-employee-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css'
 })
 export class EmployeeFormComponent implements OnInit {
 
   form!: FormGroup;
-
   isEditMode = false;
-
-  employeeId: number | null = null;
+  employeeId: number | string | null = null;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private employeeService: EmployeeService,
-    private notificationService: NotificationService
+    private readonly formBuilder: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly employeeService: EmployeeService,
+    private readonly notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
-
     this.form = this.formBuilder.group({
-
-      name: ['',[  Validators.required, Validators.minLength(3)]],
-
-      department: [ '', Validators.required],
-
-      title: ['',Validators.required],
-
-      email: ['', [Validators.required,Validators.email]],
-
-      hireDate: ['',futureDateValidator],
-
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      department: ['', Validators.required],
+      title: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      hireDate: ['', futureDateValidator],
       isActive: [true]
-
     });
 
     this.loadEmployeeForEdit();
   }
 
   private loadEmployeeForEdit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
 
-    const id = this.route.snapshot.paramMap.get('id');
-
-    if (!id) {
+    if (!idParam) {
       return;
     }
 
     this.isEditMode = true;
+    this.employeeId = idParam;
 
-    this.employeeId = Number(id);
-
-    const employee =
-      this.employeeService.getEmployeeById(this.employeeId);
-
-    if (!employee) {
-      this.router.navigate(['/employees']);
-      return;
-    }
-
-    this.form.patchValue({
-      name: employee.name,
-      department: employee.department,
-      title: employee.title,
-      email: employee.email,
-      hireDate: employee.hireDate,
-      isActive: employee.isActive
+    this.employeeService.getEmployeeById(idParam).subscribe({
+      next: employee => {
+        this.form.patchValue({
+          name: employee.name,
+          department: employee.department,
+          title: employee.title,
+          email: employee.email,
+          hireDate: employee.hireDate,
+          isActive: employee.isActive
+        });
+      },
+      error: () => {
+        this.router.navigate(['/not-found']);
+      }
     });
   }
 
   saveEmployee(): void {
-
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -116,7 +97,6 @@ export class EmployeeFormComponent implements OnInit {
     const formValue = this.form.value;
 
     if (this.isEditMode && this.employeeId !== null) {
-
       const updatedEmployee: Employee = {
         id: this.employeeId,
         name: formValue.name,
@@ -130,42 +110,38 @@ export class EmployeeFormComponent implements OnInit {
       this.employeeService.updateEmployee(
         this.employeeId,
         updatedEmployee
-      );
+      ).subscribe({
+        next: () => {
+          this.notificationService.show('Employee updated successfully');
+          this.router.navigate(['/employees']);
+        },
+        error: error => {
+          console.error('Failed to update employee.', error);
+        }
+      });
 
-      this.notificationService.show(
-        'Employee updated successfully'
-      );
-
-    } else {
-
-      const employees =
-        this.employeeService.getEmployees();
-
-      const newId =
-        employees.length > 0
-          ? Math.max(
-              ...employees.map(employee => employee.id)
-            ) + 1
-          : 1;
-
-      const newEmployee: Employee = {
-        id: newId,
-        name: formValue.name,
-        department: formValue.department,
-        title: formValue.title,
-        email: formValue.email,
-        hireDate: formValue.hireDate || '',
-        isActive: formValue.isActive
-      };
-
-      this.employeeService.addEmployee(newEmployee);
-
-      this.notificationService.show(
-        'Employee added successfully'
-      );
+      return;
     }
 
-    this.router.navigate(['/employees']);
+    const newEmployee: Employee = {
+      id: '',
+      name: formValue.name,
+      department: formValue.department,
+      title: formValue.title,
+      email: formValue.email,
+      hireDate: formValue.hireDate || '',
+      isActive: formValue.isActive
+    };
+
+    this.employeeService.addEmployee(newEmployee).subscribe({
+      next: () => {
+        this.notificationService.show('Employee added successfully');
+        this.router.navigate(['/employees']);
+      },
+      error: error => {
+        console.error('Failed to add employee.', error);
+      }
+    });
   }
 
   cancel(): void {

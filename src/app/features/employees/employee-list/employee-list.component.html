@@ -1,9 +1,7 @@
 <section class="employee-list-wrapper">
 
-  <!-- Decorative background -->
   <div class="bg-glow"></div>
 
-  <!-- Page Heading -->
   <header class="page-heading">
     <div class="heading-content">
       <span class="eyebrow-badge">
@@ -11,9 +9,7 @@
         EMPLOYEE DIRECTORY
       </span>
 
-      <h1>
-        Our Team <span>Members</span>
-      </h1>
+      <h1>Our Team <span>Members</span></h1>
 
       <p class="subtitle">
         Explore, manage, and connect with your powerhouse team.
@@ -23,7 +19,9 @@
     <div class="employee-count-card">
       <div class="count-ring">
         <span class="count-number">
-          {{ filteredEmployees.length }}
+          @if (filteredEmployees$ | async; as employees) {
+            {{ employees.length }}
+          }
         </span>
       </div>
 
@@ -34,24 +32,24 @@
     </div>
   </header>
 
-  <!-- Search + Add Employee Controls -->
   <div class="list-controls">
     <form #searchForm="ngForm" class="search-form">
       <div class="search-input-wrapper">
         <span class="search-icon">🔍</span>
-        
+
         <input
           type="text"
           name="search"
           [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchChange($event)"
           placeholder="Search by name, department or title..."
-        >
+        />
 
         @if (searchTerm) {
           <button
             type="button"
             class="clear-btn"
-            (click)="searchTerm = ''"
+            (click)="onSearchChange('')"
             title="Clear search"
           >
             ✕
@@ -70,34 +68,69 @@
     </button>
   </div>
 
-  <!-- Employees Grid -->
-  @if (filteredEmployees.length > 0) {
-    <div class="employee-grid">
-      @for (
-        employee of filteredEmployees;
-        track employee.id
-      ) {
-        <app-employee-card
-          [employee]="employee"
-          (employeeSelected)="onEmployeeSelected($event)"
-        />
-      }
-    </div>
-  } @else {
-    <!-- Empty State -->
-    <div class="empty-state">
-      <div class="empty-icon-wrapper">
-        <span class="empty-icon">👥</span>
+  @if (loading) {
+    <div class="loading-state">
+      <div class="loader-wrapper">
+        <div class="loading-spinner"></div>
+        <div class="spinner-center-icon">👥</div>
       </div>
 
-      <h2>
-        No employees found
-      </h2>
-
-      <p>
-        There are currently no team members matching your search.
-      </p>
+      <h2>Loading Directory</h2>
+      <p>Please wait while we fetch the team records...</p>
     </div>
+  }
+
+  @if (errorMessage) {
+    <div class="error-state">
+      <div class="error-icon-wrapper">
+        <div class="error-pulse-ring"></div>
+        <span class="error-icon">⚠️</span>
+      </div>
+
+      <h2>Something Went Wrong</h2>
+
+      <p class="error-message-text">
+        {{ errorMessage }}
+      </p>
+
+      <button
+        type="button"
+        class="retry-btn"
+        (click)="ngOnInit()"
+      >
+        <span class="retry-icon">🔄</span>
+        <span>Try Again</span>
+      </button>
+    </div>
+  }
+
+  @if (!loading && !errorMessage) {
+    @if (filteredEmployees$ | async; as employees) {
+
+      @if (employees.length > 0) {
+        <div class="employee-grid">
+          @for (employee of employees; track employee.id) {
+            <app-employee-card
+              [employee]="employee"
+              (employeeSelected)="onEmployeeSelected($event)"
+            />
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <div class="empty-icon-wrapper">
+            <span class="empty-icon">👥</span>
+          </div>
+
+          <h2>No employees found</h2>
+
+          <p>
+            There are currently no team members matching your search.
+          </p>
+        </div>
+      }
+
+    }
   }
 
 </section>

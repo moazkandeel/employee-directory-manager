@@ -1,228 +1,55 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
+
 import { Employee } from '../../models/employee';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  private readonly storageKey = 'employees';
+  private readonly apiUrl = `${environment.apiUrl}/employees`;
 
-  private employees: Employee[] = [
-    {
-      id: 1,
-      name: 'Moaz Kandeel',
-      department: 'Engineering',
-      title: 'Frontend Developer',
-      email: 'moaz.kandeel@company.com',
-      hireDate: '2022-03-15',
-      isActive: true
-    },
-    {
-      id: 2,
-      name: 'Sara Mohamed',
-      department: 'Human Resources',
-      title: 'HR Specialist',
-      email: 'sara.mohamed@company.com',
-      hireDate: '2021-07-20',
-      isActive: true
-    },
-    {
-      id: 3,
-      name: 'Omar Ali',
-      department: 'Finance',
-      title: 'Financial Analyst',
-      email: 'omar.ali@company.com',
-      hireDate: '2023-01-10',
-      isActive: true
-    },
-    {
-      id: 4,
-      name: 'Mariam Adel',
-      department: 'Marketing',
-      title: 'Marketing Specialist',
-      email: 'mariam.adel@company.com',
-      hireDate: '2020-11-05',
-      isActive: false
-    },
-    {
-      id: 5,
-      name: 'Youssef Khaled',
-      department: 'Engineering',
-      title: 'Backend Developer',
-      email: 'youssef.khaled@company.com',
-      hireDate: '2022-09-12',
-      isActive: true
-    },
-    {
-      id: 6,
-      name: 'Nour Ibrahim',
-      department: 'Sales',
-      title: 'Sales Executive',
-      email: 'nour.ibrahim@company.com',
-      hireDate: '2023-04-18',
-      isActive: true
-    },
-    {
-      id: 7,
-      name: 'Karim Mostafa',
-      department: 'Engineering',
-      title: 'Software Engineer',
-      email: 'karim.mostafa@company.com',
-      hireDate: '2021-02-22',
-      isActive: true
-    },
-    {
-      id: 8,
-      name: 'Laila Ahmed',
-      department: 'Finance',
-      title: 'Accountant',
-      email: 'laila.ahmed@company.com',
-      hireDate: '2020-06-14',
-      isActive: false
-    },
-    {
-      id: 9,
-      name: 'Mahmoud Samir',
-      department: 'Marketing',
-      title: 'Content Strategist',
-      email: 'mahmoud.samir@company.com',
-      hireDate: '2022-12-01',
-      isActive: true
-    },
-    {
-      id: 10,
-      name: 'Hana Tarek',
-      department: 'Human Resources',
-      title: 'Recruitment Specialist',
-      email: 'hana.tarek@company.com',
-      hireDate: '2023-06-08',
-      isActive: true
-    },
-    {
-      id: 11,
-      name: 'Mostafa Gamal',
-      department: 'Sales',
-      title: 'Account Manager',
-      email: 'mostafa.gamal@company.com',
-      hireDate: '2021-09-30',
-      isActive: true
-    },
-    {
-      id: 12,
-      name: 'Salma Wael',
-      department: 'Engineering',
-      title: 'UI/UX Developer',
-      email: 'salma.wael@company.com',
-      hireDate: '2022-05-17',
-      isActive: true
-    },
-    {
-      id: 13,
-      name: 'Tarek Ashraf',
-      department: 'Finance',
-      title: 'Finance Manager',
-      email: 'tarek.ashraf@company.com',
-      hireDate: '2019-08-25',
-      isActive: true
-    },
-    {
-      id: 14,
-      name: 'Dina Hany',
-      department: 'Marketing',
-      title: 'Brand Manager',
-      email: 'dina.hany@company.com',
-      hireDate: '2020-03-11',
-      isActive: false
-    },
-    {
-      id: 15,
-      name: 'Amr Nabil',
-      department: 'Engineering',
-      title: 'DevOps Engineer',
-      email: 'amr.nabil@company.com',
-      hireDate: '2023-02-06',
-      isActive: true
-    }
-  ];
+  constructor(private readonly http: HttpClient) {}
 
-  constructor() {
-    this.loadEmployees();
-  }
+  // Update the getEmployees method to return an Observable of Employee array and handle errors
 
-  getEmployees(): Employee[] {
-    return this.employees;
-  }
-
-  getEmployeeById(id: number): Employee | undefined {
-    return this.employees.find(
-      employee => employee.id === id
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.apiUrl).pipe(
+      catchError(() =>
+        throwError(() =>
+          new Error('Unable to load employees. Please try again.')
+        )
+      )
     );
   }
 
-  addEmployee(employee: Employee): void {
+  // Update the getEmployeeById method to accept both number and string types for the id parameter
 
-    this.employees.push(employee);
-
-    this.saveEmployees();
+  getEmployeeById(id: number | string): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
   }
 
-  updateEmployee(
-    id: number,
-    employee: Employee
-  ): void {
+  // Add the addEmployee method to create a new employee
 
-    const index = this.employees.findIndex(
-      item => item.id === id
-    );
-
-    if (index !== -1) {
-
-      this.employees[index] = employee;
-
-      this.saveEmployees();
-    }
+  addEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.apiUrl, employee);
   }
 
-  deleteEmployee(id: number): void {
 
-    this.employees = this.employees.filter(
-      employee => employee.id !== id
-    );
+  // Update the updateEmployee method to accept both number and string types for the id parameter
 
-    this.saveEmployees();
-  }
-
-  private saveEmployees(): void {
-
-    localStorage.setItem(
-      this.storageKey,
-      JSON.stringify(this.employees)
+  updateEmployee(id: number | string, employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(
+      `${this.apiUrl}/${id}`,
+      employee
     );
   }
 
-  private loadEmployees(): void {
-
-  const storedEmployees =
-    localStorage.getItem(this.storageKey);
-
-  if (!storedEmployees) {
-    this.saveEmployees();
-    return;
+  // Add the deleteEmployee method to accept both number and string types for the id parameter
+  deleteEmployee(id: number | string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-
-  try {
-
-    this.employees = JSON.parse(storedEmployees);
-
-  } catch (error) {
-
-    console.error(
-      'Failed to load employees from LocalStorage.',
-      error
-    );
-
-    this.saveEmployees();
-  }
-}
 }
