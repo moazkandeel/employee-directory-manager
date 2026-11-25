@@ -1,3 +1,18 @@
+# Employee Directory Manager
+
+An employee directory dashboard built with Angular 19: list, search, add, edit and delete employees against a live REST API, with both reactive and template-driven forms.
+
+![Screenshot](screenshot.png)
+
+**Live demo:** https://moazkandeel.github.io/employee-directory-manager/
+
+## Run locally
+
+```bash
+npm install
+ng serve
+```
+
 ## Technologies
 
 - Angular 19
